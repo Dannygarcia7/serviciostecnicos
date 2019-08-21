@@ -49,8 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categoria.cs" />
+    <Compile Include="CategoriasBL.cs" />
     <Compile Include="Contexto.cs" />
-    <Compile Include="IProductosBL.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="ProductosBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

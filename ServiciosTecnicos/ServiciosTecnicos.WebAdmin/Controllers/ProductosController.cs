@@ -10,10 +10,12 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
     public class ProductosController : Controller
     {
         ProductosBL _productosBL;
+        CategoriasBL _categoriasBL;
 
         public ProductosController()
         {
             _productosBL = new ProductosBL();
+            _categoriasBL = new CategoriasBL();
         }
         // GET: Productos
         public ActionResult Index()
@@ -26,6 +28,10 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         public ActionResult Crear()
         {
             var nuevoproducto = new Producto();
+            var categorias = _categoriasBL.ObtenerCategorias();
+
+            ViewBag.Listadecategorias = 
+                new SelectList(categorias, "Id", "Descripcion");
 
             return View(nuevoproducto);
         }
@@ -41,6 +47,10 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         public ActionResult Editar(int id)
         {
             var producto = _productosBL.ObtenerProducto(id);
+            var categoria = _categoriasBL.ObtenerCategoria(id);
+
+            ViewBag.CategoriaId = 
+                new SelectList(categoria, "Id" , "Descripcion" , producto.CategoriaId);
 
             return View(producto);
         }

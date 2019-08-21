@@ -20,7 +20,8 @@ namespace ServiciosTecnicosBL
 
         public List<Producto> ObtenerProductos()
         {
-            Listadeprodutos = _contexto.Productos.ToList();
+            Listadeprodutos = _contexto.Productos.Include("Categoria").ToList();
+
             return Listadeprodutos;
         }
 
