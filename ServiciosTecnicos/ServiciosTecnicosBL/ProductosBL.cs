@@ -16,12 +16,43 @@ namespace ServiciosTecnicosBL
             _contexto = new Contexto();
             Listadeprodutos = new List<Producto>();
         }
-
+    
 
         public List<Producto> ObtenerProductos()
         {
             Listadeprodutos = _contexto.Productos.ToList();
             return Listadeprodutos;
+        }
+
+        public void GuardarProductos(Producto producto)
+        {
+            if(producto.Id == 0)
+            {
+                _contexto.Productos.Add(producto);
+            }else
+            {
+                var productoExistente = _contexto.Productos.Find(producto.Id);
+                productoExistente.Descripcion = producto.Descripcion;
+                productoExistente.Precio = producto.Precio;
+                
+            }
+
+            _contexto.SaveChanges();
+        }
+
+        public Producto ObtenerProducto(int id)
+        {
+            var producto = _contexto.Productos.Find(id);
+
+            return producto;
+        }
+
+        public void EliminarProducto(int id)
+        {
+            var producto = _contexto.Productos.Find(id);
+
+            _contexto.Productos.Remove(producto);
+            _contexto.SaveChanges();
         }
     }
 }

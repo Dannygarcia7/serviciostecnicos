@@ -12,7 +12,7 @@ namespace ServiciosTecnicos.Web.Controllers
         // GET: Productos
         public ActionResult Index()
         {
-            var productosBL = new ProductosBL();
+            var productosBL = new Producto();
             var listadeproductos = productosBL.ObtenerProductos();
 
             return View(listadeproductos);
