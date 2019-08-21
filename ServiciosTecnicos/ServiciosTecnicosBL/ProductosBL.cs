@@ -8,8 +8,17 @@ namespace ServiciosTecnicosBL
 {
     public class ProductosBL
     {
+        Contexto _contexto;
+        public ProductosBL()
+        {
+            _contexto = new Contexto();
+        }
+
+
         public List<Producto> ObtenerProductos()
         {
+            _contexto.Productos.ToList();
+
             var producto = new Producto();
             producto.Id = 1;
             producto.Descripcion = "Mantenimiento de Sistema";
