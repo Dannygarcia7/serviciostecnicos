@@ -38,11 +38,11 @@ namespace ServiciosTecnicosBL
                 var productoExistente = _contexto.Productos.Find(producto.Id);
                 productoExistente.Descripcion = producto.Descripcion;
                 productoExistente.Precio = producto.Precio;
-                productoExistente.Activo = producto.Activo;
-                productoExistente.Categoria = producto.Categoria;
+                productoExistente.CategoriaId = producto.CategoriaId;
+                productoExistente.UrlImagen = producto.UrlImagen;
             }
 
-            _contexto.SaveChanges(); //Error mostrar el ing.
+            _contexto.SaveChanges();
         }
 
         public Producto ObtenerProducto(int id)

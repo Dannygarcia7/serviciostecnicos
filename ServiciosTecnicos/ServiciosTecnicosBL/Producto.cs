@@ -26,6 +26,10 @@ namespace ServiciosTecnicosBL
         public double Precio { get; set; }
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
+
+        [Display(Name = "Imagen")]
+        public string UrlImagen { get; set; }
+
         public bool Activo { get; set; }
     }
 }
