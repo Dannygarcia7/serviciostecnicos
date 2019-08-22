@@ -30,7 +30,7 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
             var nuevoproducto = new Producto();
             var categorias = _categoriasBL.ObtenerCategorias();
 
-            ViewBag.Listadecategorias = 
+            ViewBag.CategoriaID = 
                 new SelectList(categorias, "Id", "Descripcion");
 
             return View(nuevoproducto);
@@ -39,15 +39,31 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         [HttpPost]
         public ActionResult Crear(Producto producto)
         {
-            _productosBL.GuardarProductos(producto);
+            if (ModelState.IsValid)
+            {
+                if(producto.CategoriaId == 0)
+                {
+                    ModelState.AddModelError("CategoriaId","Selecione una Categoria");
+                    return View(producto);
+                }
+                _productosBL.GuardarProductos(producto);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            var categorias = _categoriasBL.ObtenerCategorias();
+
+            ViewBag.CategoriaId =
+                new SelectList(categorias, "Id", "Descripcion");
+
+            return View(producto);
+           
         }
 
         public ActionResult Editar(int id)
         {
             var producto = _productosBL.ObtenerProducto(id);
-            var categoria = _categoriasBL.ObtenerCategoria(id);
+            var categoria = _categoriasBL.ObtenerCategorias();
 
             ViewBag.CategoriaId = 
                 new SelectList(categoria, "Id" , "Descripcion" , producto.CategoriaId);

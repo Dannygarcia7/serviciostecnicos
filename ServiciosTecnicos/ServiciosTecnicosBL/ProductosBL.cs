@@ -20,7 +20,9 @@ namespace ServiciosTecnicosBL
 
         public List<Producto> ObtenerProductos()
         {
-            Listadeprodutos = _contexto.Productos.Include("Categoria").ToList();
+            Listadeprodutos = _contexto.Productos
+                .Include("Categoria")
+                .ToList();
 
             return Listadeprodutos;
         }
@@ -29,21 +31,24 @@ namespace ServiciosTecnicosBL
         {
             if(producto.Id == 0)
             {
-                _contexto.Productos.Add(producto);
-            }else
+                _contexto.Productos.Add(producto);    
+            }
+            else
             {
                 var productoExistente = _contexto.Productos.Find(producto.Id);
                 productoExistente.Descripcion = producto.Descripcion;
                 productoExistente.Precio = producto.Precio;
-                
+                productoExistente.Activo = producto.Activo;
+                productoExistente.Categoria = producto.Categoria;
             }
 
-            _contexto.SaveChanges();
+            _contexto.SaveChanges(); //Error mostrar el ing.
         }
 
         public Producto ObtenerProducto(int id)
         {
-            var producto = _contexto.Productos.Find(id);
+            var producto = _contexto.Productos
+                .Include("Categoria").FirstOrDefault(p => p.Id == id);
 
             return producto;
         }
