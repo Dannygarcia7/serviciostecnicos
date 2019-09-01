@@ -34,9 +34,14 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         [HttpPost]//regreso
         public ActionResult Crear(Cliente cliente)
         {
+            if (ModelState.IsValid)
+            {
+               
+                _clientesBL.GuardarCliente(cliente);
+                return RedirectToAction("Index");
 
-            _clientesBL.GuardarCliente(cliente);
-            return RedirectToAction("Index");
+            }
+            return View(cliente);
         }
 
 
