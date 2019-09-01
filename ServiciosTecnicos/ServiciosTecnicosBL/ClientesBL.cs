@@ -35,7 +35,7 @@ namespace ServiciosTecnicosBL
                clienteExistente.Telefono = cliente.Telefono;
                clienteExistente.Direccion = cliente.Direccion;
                clienteExistente.Activo = cliente.Activo;
-                
+
             }
             _contexto.SaveChanges();
         }
