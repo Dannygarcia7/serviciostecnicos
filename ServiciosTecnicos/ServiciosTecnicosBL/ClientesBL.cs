@@ -52,7 +52,6 @@ namespace ServiciosTecnicosBL
 
             _contexto.Clientes.Remove(cliente);
             _contexto.SaveChanges();
-
         }
       
     }
