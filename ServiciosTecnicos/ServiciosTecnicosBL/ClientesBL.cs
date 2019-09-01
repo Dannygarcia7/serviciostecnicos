@@ -43,7 +43,7 @@ namespace ServiciosTecnicosBL
         public Cliente ObtenerCliente(int id)
         {
             var cliente = _contexto.Clientes.Find(id);
-
+ 
             return cliente;
         }
         public void EliminarCliente(int id)
