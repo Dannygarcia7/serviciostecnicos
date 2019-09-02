@@ -14,9 +14,7 @@ namespace ServiciosTecnicosBL
         [Required(ErrorMessage = "Ingrese el nombre del cliente")]
         [MinLength(6, ErrorMessage = "Ingrese mínimo 6 caracteres")]
         public string Nombre { get; set; }
-         
-
-
+        
         [Required(ErrorMessage = "Ingrese el telefono")]
         [MinLength(8, ErrorMessage = "El telefono debe ser de 8 digitos incluyendo guiones")]
         [MaxLength(12, ErrorMessage = "El telefono debe ser de 12 digitos")]
