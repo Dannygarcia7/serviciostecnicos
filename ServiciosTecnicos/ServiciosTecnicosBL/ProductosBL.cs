@@ -9,23 +9,34 @@ namespace ServiciosTecnicosBL
     public class ProductosBL
     {
         Contexto _contexto;
-        public List<Producto> Listadeprodutos { get; set; }
+        public List<Producto> ListadeProductos { get; set; }
 
         public ProductosBL()
         {
             _contexto = new Contexto();
-            Listadeprodutos = new List<Producto>();
+            ListadeProductos = new List<Producto>();
         }
     
 
         public List<Producto> ObtenerProductos()
         {
-            Listadeprodutos = _contexto.Productos
+            ListadeProductos = _contexto.Productos
                 .Include("Categoria")
                 .ToList();
 
-            return Listadeprodutos;
+            return ListadeProductos;
         }
+         public List<Producto> ObtenerProductosActivos()
+        {
+            ListadeProductos = _contexto.Productos
+                .Include("Categoria")
+                .Where(r => r.Activo == true)
+                .OrderBy(r => r.Descripcion)
+                .ToList();
+
+            return ListadeProductos;
+        }
+
 
         public void GuardarProductos(Producto producto)
         {

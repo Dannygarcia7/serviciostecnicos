@@ -18,9 +18,23 @@ namespace ServiciosTecnicosBL
         }
         public List<Cliente> ObtenerClientes()
         {
-            ListadeClientes = _contexto.Clientes.ToList();
+            ListadeClientes = _contexto.Clientes
+                .OrderBy(r => r.Nombre)
+                .ToList();
+
             return ListadeClientes;
         }
+
+        public List<Cliente> ObtenerClientesActivos()
+        {
+            ListadeClientes = _contexto.Clientes
+                .Where(r => r.Activo == true)
+                .OrderBy(r => r.Nombre)
+                .ToList();
+
+            return ListadeClientes;
+
+            }
 
         public void GuardarCliente (Cliente cliente)
         {
@@ -30,7 +44,7 @@ namespace ServiciosTecnicosBL
             }
             else
             {
-                var clienteExistente = _contexto.Clientes.Find(cliente.Id);
+               var clienteExistente = _contexto.Clientes.Find(cliente.Id);
                clienteExistente.Nombre = cliente.Nombre;
                clienteExistente.Telefono = cliente.Telefono;
                clienteExistente.Direccion = cliente.Direccion;
@@ -54,9 +68,5 @@ namespace ServiciosTecnicosBL
             _contexto.SaveChanges();
         }
 
-        public object ObtenerClientesActivos()
-        {
-            throw new NotImplementedException();
         }
-    }
 }
