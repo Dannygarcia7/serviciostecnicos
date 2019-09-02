@@ -53,6 +53,10 @@ namespace ServiciosTecnicosBL
             _contexto.Clientes.Remove(cliente);
             _contexto.SaveChanges();
         }
-      
+
+        public object ObtenerClientesActivos()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
