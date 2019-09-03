@@ -23,11 +23,9 @@ namespace ServiciosTecnicosBL
              ListadeOrdenes = _contexto.Ordenes
                 .Include("Cliente")
                 .ToList();
-             //orden = _contexto.Ordenes
-                //.Include("Cliente").FirstOrDefault(p => p.Id == id);
-               //  return orden;
-                 
             return ListadeOrdenes;
+
+            
         }
 
         public List<OrdenDetalle> ObtenerOrdenDetalle(int ordenId)
@@ -66,7 +64,7 @@ namespace ServiciosTecnicosBL
 
             {
                 var ordenExistente = _contexto.Ordenes.Find(orden.Id);
-                ordenExistente.ClienteId = ordenExistente.ClienteId;
+                ordenExistente.ClienteId = orden.ClienteId;
                 ordenExistente.Activo = orden.Activo;
             }
             

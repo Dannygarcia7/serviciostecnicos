@@ -35,9 +35,9 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
             var nuevaOrdenDetalle = new OrdenDetalle();
             nuevaOrdenDetalle.OrdenId = id;
 
-            var productos = _productosBL.ObtenerProductos();
+            var productos = _productosBL.ObtenerProductosActivos();
 
-            ViewBag.ProductoId = new SelectList(productos, "id", "Nombre");
+            ViewBag.ProductoId = new SelectList(productos, "id", "Descripcion");//Nombre
 
             return View(nuevaOrdenDetalle);
         }
@@ -55,7 +55,7 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
                 _ordenBL.GuardarOrdenDetalle(ordenDetalle);
                 return RedirectToAction("Index", new { id = ordenDetalle.OrdenId });
             }
-            var productos = _productosBL.ObtenerProductos();
+            var productos = _productosBL.ObtenerProductosActivos();//Sin activos
             ViewBag.ProductoId = new SelectList(productos, "Id", "Descripcion");
 
             return View(ordenDetalle);

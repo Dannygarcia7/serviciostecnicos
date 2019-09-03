@@ -30,20 +30,20 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
             var nuevoproducto = new Producto();
             var categorias = _categoriasBL.ObtenerCategorias();
 
-            ViewBag.CategoriaID = 
+            ViewBag.CategoriaID =
                 new SelectList(categorias, "Id", "Descripcion");
 
             return View(nuevoproducto);
         }
 
         [HttpPost]
-        public ActionResult Crear(Producto producto, HttpPostedFileBase imagen)
+        public ActionResult Crear(Producto producto, HttpPostedFileBase imagen)//imagen
         {
             if (ModelState.IsValid)
             {
-                if(producto.CategoriaId == 0)
+                if (producto.CategoriaId == 0)
                 {
-                    ModelState.AddModelError("CategoriaId","Selecione una Categoria");
+                    ModelState.AddModelError("CategoriaId", "Selecione una Categoria");
                     return View(producto);
                 }
 
@@ -52,7 +52,7 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
                     producto.UrlImagen = GuardarImagen(imagen);
                 }
 
-                _productosBL.GuardarProductos(producto);
+                _productosBL.GuardarProducto(producto);
 
                 return RedirectToAction("Index");
             }
@@ -63,7 +63,7 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
                 new SelectList(categorias, "Id", "Descripcion");
 
             return View(producto);
-           
+
         }
 
         public ActionResult Editar(int id)
@@ -71,8 +71,8 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
             var producto = _productosBL.ObtenerProducto(id);
             var categoria = _categoriasBL.ObtenerCategorias();
 
-            ViewBag.CategoriaId = 
-                new SelectList(categoria, "Id" , "Descripcion" , producto.CategoriaId);
+            ViewBag.CategoriaId =
+                new SelectList(categoria, "Id", "Descripcion", producto.CategoriaId);
 
             return View(producto);
         }
@@ -82,7 +82,7 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(producto.CategoriaId == 0)
+                if (producto.CategoriaId == 0)
                 {
                     ModelState.AddModelError("CategoriaId", "Selecciona una categoria");
                     return View(producto);
@@ -91,16 +91,16 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
                 {
                     producto.UrlImagen = GuardarImagen(imagen);
                 }
-                _productosBL.GuardarProductos(producto);
+                _productosBL.GuardarProducto(producto);
                 return RedirectToAction("Index");
             }
             var categorias = _categoriasBL.ObtenerCategorias();
-            ViewBag.CategoriaId = new SelectList(categorias,"Id", "Descripcion");
+            ViewBag.CategoriaId = new SelectList(categorias, "Id", "Descripcion");
 
             return View(producto);
         }
-
         public ActionResult Detalle(int id)
+            
         {
             var producto = _productosBL.ObtenerProducto(id);
             return View(producto);

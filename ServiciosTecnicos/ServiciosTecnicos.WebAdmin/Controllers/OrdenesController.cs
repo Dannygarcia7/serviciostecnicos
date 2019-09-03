@@ -31,10 +31,11 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         public ActionResult Crear()
         {
             var nuevaOrden = new Orden();
-            var clientes = _clientesBL.ObtenerClientes();
+            var clientes = _clientesBL.ObtenerClientesActivos();
 
             ViewBag.ClienteId = new SelectList(clientes, "id", "Nombre");
             return View(nuevaOrden);
+
         }
 
         //HttpPost Crear recibiendo una orden 
@@ -55,7 +56,7 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
                 return RedirectToAction("Index");
             
             }
-            var clientes = _clientesBL.ObtenerClientes();
+            var clientes = _clientesBL.ObtenerClientesActivos();
 
             ViewBag.ClienteId = new SelectList(clientes, "id", "Nombre");
             return View(orden);
@@ -64,7 +65,7 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         public ActionResult Editar(int id)
         {
             var orden = _ordenesBL.ObtenerOrden(id);
-            var clientes = _clientesBL.ObtenerClientes();
+            var clientes = _clientesBL.ObtenerClientesActivos();
 
             ViewBag.ClienteId = new SelectList(clientes, "Id", "Nombre", orden.ClienteId);
 

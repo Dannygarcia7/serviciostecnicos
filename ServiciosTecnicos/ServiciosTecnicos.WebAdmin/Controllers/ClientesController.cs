@@ -55,10 +55,17 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         [HttpPost]
         public ActionResult Editar(Cliente cliente)
         {
-            _clientesBL.GuardarCliente(cliente);
+            if (ModelState.IsValid)
+            {
 
-            return RedirectToAction("Index");
+                _clientesBL.GuardarCliente(cliente);
+                return RedirectToAction("Index");
+            }
+
+            return View(cliente);
+
         }
+
         public ActionResult Detalle(int id)
         {
             var cliente = _clientesBL.ObtenerCliente(id);

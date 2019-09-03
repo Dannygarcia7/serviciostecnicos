@@ -16,17 +16,20 @@ namespace ServiciosTecnicosBL
             _contexto = new Contexto();
             ListadeProductos = new List<Producto>();
         }
-    
-
+        
         public List<Producto> ObtenerProductos()
         {
             ListadeProductos = _contexto.Productos
                 .Include("Categoria")
+                .OrderBy(r => r.Categoria.Descripcion)
+                .ThenBy(r => r.Descripcion)
                 .ToList();
 
             return ListadeProductos;
         }
-         public List<Producto> ObtenerProductosActivos()
+
+
+        public List<Producto> ObtenerProductosActivos()
         {
             ListadeProductos = _contexto.Productos
                 .Include("Categoria")
@@ -38,7 +41,7 @@ namespace ServiciosTecnicosBL
         }
 
 
-        public void GuardarProductos(Producto producto)
+        public void GuardarProducto(Producto producto)
         {
             if(producto.Id == 0)
             {
@@ -48,8 +51,8 @@ namespace ServiciosTecnicosBL
             {
                 var productoExistente = _contexto.Productos.Find(producto.Id);
                 productoExistente.Descripcion = producto.Descripcion;
-                productoExistente.Precio = producto.Precio;
                 productoExistente.CategoriaId = producto.CategoriaId;
+                productoExistente.Precio = producto.Precio;
                 productoExistente.UrlImagen = producto.UrlImagen;
             }
 

@@ -19,8 +19,8 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
         // GET: Categorias
         public ActionResult Index()
         {
-            var listadecategorias = _categoriasBL.ObtenerCategorias();
-            return View(listadecategorias);
+            var listadeCategorias = _categoriasBL.ObtenerCategorias();
+            return View(listadeCategorias);
         }
 
         public ActionResult Crear()
@@ -43,17 +43,17 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
 
                 return RedirectToAction("Index");
 
-            }else
-            {
+            }
+            
                 return View(categoria);
             }
            
-        }
+        
 
         public ActionResult Editar(int id)
         {
-            var producto = _categoriasBL.ObtenerCategoria(id);
-            return View(producto);
+            var categoria = _categoriasBL.ObtenerCategoria(id);
+            return View(categoria);
         }
 
         [HttpPost]
@@ -71,11 +71,11 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
                 return RedirectToAction("Index");
 
             }
-            else
-            {
+        
+            
                 return View(categoria);
             }
-        }
+        
 
         public ActionResult Detalle(int id)
         {
@@ -85,8 +85,8 @@ namespace ServiciosTecnicos.WebAdmin.Controllers
 
         public ActionResult Eliminar(int id)
         {
-            var producto = _categoriasBL.ObtenerCategoria(id);
-            return View(producto);
+            var categoria = _categoriasBL.ObtenerCategoria(id);
+            return View(categoria);
         }
 
         [HttpPost]
