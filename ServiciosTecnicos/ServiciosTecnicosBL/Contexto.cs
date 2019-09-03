@@ -27,6 +27,6 @@ namespace ServiciosTecnicosBL
 
         public DbSet<Orden> Ordenes { get; set; }
         public DbSet<OrdenDetalle> OrdenDetalle { get; set; }
-
+        //  creaciones de DbSet
     }
 }
