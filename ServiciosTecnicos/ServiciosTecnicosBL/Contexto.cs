@@ -19,6 +19,7 @@ namespace ServiciosTecnicosBL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            Database.SetInitializer(new DatosdeInicio()); //Agregar datos de inicio a la base de datos despues del momento de crear la base de datos.
         }
 
         public DbSet<Producto> Productos { get; set; }
@@ -27,6 +28,7 @@ namespace ServiciosTecnicosBL
 
         public DbSet<Orden> Ordenes { get; set; }
         public DbSet<OrdenDetalle> OrdenDetalle { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         //  creaciones de DbSet
     }
 }
