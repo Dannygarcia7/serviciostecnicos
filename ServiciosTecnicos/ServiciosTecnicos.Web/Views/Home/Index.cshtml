@@ -27,7 +27,7 @@
             <!-- /section title -->
             @foreach (var producto in Model
                                         .Where(r=> r.Categoria.Descripcion == "Accesorios")
-                                        .Take(3)
+                                        .Take(4)
                                         .OrderBy(r=>Guid.NewGuid())
                      )
             {
@@ -104,7 +104,7 @@
                     
                     @foreach (var producto in Model
                     .Where(r=> r.Categoria.Descripcion == "Servicios")
-                    .Take(3)
+                    .Take(4)
                     .OrderBy(r=>Guid.NewGuid()))
                     {
                         <div>
