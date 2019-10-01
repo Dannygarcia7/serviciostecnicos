@@ -21,13 +21,12 @@ namespace ServiciosTecnicosBL
         {
             ListadeProductos = _contexto.Productos
                 .Include("Categoria")
-                .OrderBy(r => r.Categoria.Descripcion)
-                .ThenBy(r => r.Descripcion)
+                .OrderBy(r=>r.Categoria.Descripcion)
+                .ThenBy(r=>r.Descripcion)
                 .ToList();
 
             return ListadeProductos;
         }
-
 
         public List<Producto> ObtenerProductosActivos()
         {
